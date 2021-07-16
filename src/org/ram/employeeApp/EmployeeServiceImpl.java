@@ -195,7 +195,21 @@ public class EmployeeServiceImpl implements EmployeeServices{
 
 	@Override
 	public void listOfEmployeePerDepartment() {
-		
+		Map<String, List<Employee>> map=new HashMap<>();
+		for(int i=0;i<employeesList.size();i++) {
+			if(map.containsKey(employeesList.get(i).getDepartment())) {
+				List<Employee>tempList=map.get(employeesList.get(i).getDepartment());
+				tempList.add(employeesList.get(i));
+				map.put(employeesList.get(i).getDepartment(), tempList);
+			}
+			else
+			{
+				List<Employee> tempList=new ArrayList<>();
+				tempList.add(employeesList.get(i));
+				map.put(employeesList.get(i).getDepartment(), tempList);
+			}
+		}
+		System.out.println(map);
 	}
 	
 	}
